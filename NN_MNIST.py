@@ -10,6 +10,8 @@ from torchvision.utils import make_grid
 from torch.utils.data.dataloader import DataLoader
 from torch.utils.data import random_split
 
+torch.manual_seed(42)
+
 dataset = MNIST(root='../MNIST_Logistic_Regression/data/', download=False, transform=ToTensor())
 test_dataset = MNIST(root='../MNIST_Logistic_Regression/data/', train=False, transform=ToTensor())
 
