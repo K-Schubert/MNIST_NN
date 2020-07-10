@@ -83,7 +83,7 @@ input_size = 784
 hidden_size = 32
 num_classes = 10
 
-model = MNISTModel(input_size, hidden_size=32, out_size=num_classes)
+model = MNISTModel(input_size, hidden_size=hidden_size, out_size=num_classes)
 
 for t in model.parameters():
     print(t.shape)
