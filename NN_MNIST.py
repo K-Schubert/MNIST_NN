@@ -21,7 +21,7 @@ train_size = len(dataset) - val_size
 train_ds, val_ds = random_split(dataset, [train_size, val_size])
 print(len(train_ds), len(val_ds))
 
-batch_size=128
+batch_size=64
 
 train_loader = DataLoader(train_ds, batch_size, shuffle=True, num_workers=4, pin_memory=True)
 val_loader = DataLoader(val_ds, batch_size*2, num_workers=4, pin_memory=True)
@@ -82,7 +82,7 @@ class MNISTModel(nn.Module):
         print("Epoch [{}], val_loss: {:.4f}, val_acc: {:.4f}".format(epoch, result['val_loss'], result['val_acc']))
 
 input_size = 784
-hidden_size = 32
+hidden_size = 128
 num_classes = 10
 
 model = MNISTModel(input_size, hidden_size=hidden_size, out_size=num_classes)
@@ -169,7 +169,7 @@ print(history)
 
 history += fit(5, 0.5, model, train_loader, val_loader)
 
-history += fit(5, 0.1, model, train_loader, val_loader)
+history += fit(25, 0.1, model, train_loader, val_loader)
 
 import matplotlib.pyplot as plt
 
@@ -193,6 +193,7 @@ test_loader = DataLoader(test_dataset, batch_size=256)
 result = evaluate(model, test_loader)
 print(result)
 
+
 # Saving Model Parameters
 torch.save(model.state_dict(), 'mnist-nn-weights.pth')
 
@@ -205,19 +206,20 @@ test_loader = DataLoader(test_dataset, batch_size=256)
 result = evaluate(model2, test_loader)
 print(result)
 
+
 hyper_params = {
-	'arch': 'Linear(784, 32)+Linear(32,10)',
+	'arch': 'Linear(784, 128)+Linear(128,10)',
 	'lr1': 0.5,
 	'lr2': 0.1,
-	'num_epochs': 10,
-	'batch_size': 128
+	'num_epochs': 30,
+	'batch_size': 64
 }
 
 metrics = {
-	'val_acc': 0.9642,
-	'val_loss': 0.1266,
-	'test_acc': 0.9678,
-	'test_loss': 0.1033
+	'val_acc': 0.9780,
+	'val_loss': 0.0802,
+	'test_acc': 0.9816,
+	'test_loss': 0.0659
 }
 
 import json
