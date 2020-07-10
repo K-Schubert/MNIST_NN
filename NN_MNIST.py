@@ -171,8 +171,6 @@ history += fit(5, 0.5, model, train_loader, val_loader)
 
 history += fit(25, 0.1, model, train_loader, val_loader)
 
-import matplotlib.pyplot as plt
-
 losses = [x['val_loss'] for x in history]
 accuracies = [x['val_acc'] for x in history]
 
